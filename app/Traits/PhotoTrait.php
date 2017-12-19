@@ -32,4 +32,17 @@ trait PhotoTrait
             'cover'     => $cover
         ]);
     }
+
+    /**
+     * Delete a photo from filesystem and storage.
+     * 
+     * @param  object  $photo
+     * @return void
+     */
+    public function deletePhoto($photo)
+    {
+        @unlink(public_path("images/resources/{$photo->path_name}"));
+        @unlink(public_path("images/resources/thumb-{$photo->path_name}"));
+        $photo->delete();
+    }
 }

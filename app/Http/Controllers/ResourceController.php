@@ -93,6 +93,11 @@ class ResourceController extends Controller
      */
     public function destroy(Resource $resource)
     {
+        if (count($resource->photos)) { // delete photos from filesystem and storage.
+            foreach ($resource->photos as $key => $photo) {
+                $resource->deletePhoto($photo);
+            }
+        }
         $resource->delete();
         return redirect('/home')->with(['status' => 'Deivce successfully deleted']);
     }
