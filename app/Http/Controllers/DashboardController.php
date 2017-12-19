@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Resource;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -33,6 +34,7 @@ class DashboardController extends Controller
      */
     public function home()
     {
-        return view('dashboard.home');
+        $resources = Resource::all();
+        return view('dashboard.home', compact('resources'));
     }
 }
