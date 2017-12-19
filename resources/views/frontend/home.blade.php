@@ -37,6 +37,7 @@
                             </div>
                         @endforeach
                     </div>
+                    {{ $resources->links() }}
                 </div>
             </div>
         </div>

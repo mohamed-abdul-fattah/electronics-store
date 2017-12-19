@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $resources = Resource::all();
+        $resources = Resource::paginate(6);
         return view('frontend.home', compact('resources'));
     }
 }

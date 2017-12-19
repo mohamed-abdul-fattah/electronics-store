@@ -24,7 +24,7 @@ class ResourceController extends Controller
      */
     public function create()
     {
-        return view('resources.create');
+        return view('dashboard.resources.create');
     }
 
     /**
@@ -60,6 +60,17 @@ class ResourceController extends Controller
     }
 
     /**
+     * Show a resource details page.
+     * 
+     * @param  Resource  $resource
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Resource $resource)
+    {
+        return view('frontend.resources.show', compact('resource'));
+    }
+
+    /**
      * Show edit form for a resource
      * 
      * @param  Resource  $resource
@@ -67,7 +78,7 @@ class ResourceController extends Controller
      */
     public function edit(Resource $resource)
     {
-        return view('resources.edit', compact('resource'));
+        return view('dashboard.resources.edit', compact('resource'));
     }
 
     /**
