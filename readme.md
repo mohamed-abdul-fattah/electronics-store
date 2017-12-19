@@ -30,7 +30,7 @@ $ sudo vim electronics.conf
         CustomLog ${APACHE_LOG_DIR}/electronics-access.log combined
 </VirtualHost>
 ```
-4. Then run following commands to add the domains to the hosts file
+4. Then run following command to add the domains to the hosts file
 ```bash
 $ sudo vim /etc/hosts
 ```
@@ -39,7 +39,7 @@ $ sudo vim /etc/hosts
 127.0.0.1	electronics.dev
 127.0.0.1	staff.electronics.dev
 ```
-6. Finally run this command to enable the virtual host and reload the apache server
+6. Finally run this commands to enable the virtual host and reload the Apache server
 ```bash
 $ sudo a2ensite electronics.conf
 $ sudo systemctl reload apache2
