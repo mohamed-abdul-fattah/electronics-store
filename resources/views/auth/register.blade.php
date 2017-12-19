@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+@section('css-styles')
+{{--  Fontawesome  --}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style media="screen">
+    .facebook {
+        margin-top: 5px;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -67,6 +77,11 @@
                                     Register
                                 </button>
                             </div>
+                        </div>
+                        <div class="col-md-6 col-md-offset-4 facebook">
+                            <a class="btn btn-primary form-control" href="{{ url('oauth/facebook/redirect') }}">
+                                <i class="fa fa-facebook" aria-hidden="true"></i> Login via Facebook
+                            </a>
                         </div>
                     </form>
                 </div>

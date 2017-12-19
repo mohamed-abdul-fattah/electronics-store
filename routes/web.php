@@ -14,9 +14,9 @@
 Route::domain('staff.'.ENV('APP_URL'))->group(function () {
     Auth::routes();
     Route::get('/', 'DashboardController@index')->name('dashboard.index')->middleware('guest');
-    Route::get('home', 'DashboardController@home')->name('dashboard.home');
-    Route::resource('resources', 'ResourceController')->except('show');
-    Route::delete('photos/{photo}', 'PhotoController@destroy')->name('photos.destroy');
+    Route::get('/home', 'DashboardController@home')->name('dashboard.home');
+    Route::resource('/resources', 'ResourceController')->except('show');
+    Route::delete('/photos/{photo}', 'PhotoController@destroy')->name('photos.destroy');
 });
 
 Route::get('/', function () {
@@ -24,5 +24,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+// Oauth routes.
+Route::get('/oauth/facebook/redirect', 'SocialAuthFacebookController@redirect');
+Route::get('/oauth/facebook/callback', 'SocialAuthFacebookController@callback');
+// Frontend routes.
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('resources/{resource}', 'ResourceController@show')->name('resources.show');
+Route::get('/resources/{resource}', 'ResourceController@show')->name('resources.show');
