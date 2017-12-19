@@ -51,6 +51,25 @@ class ResourceController extends Controller
     }
 
     /**
+     * Update an existing resource.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @param  Resource  $resource
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Resource $resource)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'desc' => 'required|string'
+        ]);
+
+        $resource->update($request->only('name', 'desc'));
+
+        return redirect('/home')->with(['status' => 'Device successfully updated']);
+    }
+
+    /**
      * Delete a resource from storage.
      * 
      * @param  Resource  $resource
