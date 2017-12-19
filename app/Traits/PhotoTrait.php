@@ -21,7 +21,7 @@ trait PhotoTrait
         $file->move('images/resources', $name); // store in filesystem.
         // Make thumb photo.
         $thumb = Image::make(public_path("/images/resources/{$name}"))
-            ->fit(200, 200)
+            ->fit(227, 200)
             ->save(public_path("/images/resources/thumb-{$name}"));
 
         $this->photos()->create([

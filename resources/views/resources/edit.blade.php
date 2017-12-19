@@ -69,7 +69,7 @@
                                  @if ($photo->cover)
                                     <span class="cover">COVER</span>
                                 @endif
-                                <img src="{{$photo->thumb}}">
+                                <img src="{{$photo->thumb}}" alt="{{$photo->caption}}">
                             </a>
                         @endforeach
                         </div>
