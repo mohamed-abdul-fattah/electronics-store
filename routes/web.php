@@ -13,12 +13,8 @@
 
 Route::domain('staff.'.ENV('APP_URL'))->group(function () {
     Auth::routes();
-    Route::get('/', function () {
-        return view('auth.login');
-    });
-    Route::get('/home', function () {
-        return view('dashboard.home');
-    });
+    Route::get('/', 'DashboardController@index')->name('dashboard.index');
+    Route::get('/home', 'DashboardController@home')->name('dashboard.home');
 });
 
 Route::get('/', function () {
