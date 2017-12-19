@@ -17,7 +17,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="/resources" method="post" class="form-horizontal">
+                    <form action="/resources" method="post" class="form-horizontal" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="form-group col-md-12">
                             <label for="name" class="form-label">Name</label>
@@ -28,6 +28,10 @@
                             <label for="desc" class="form-label">Description</label>
                             <textarea name="desc" id="desc" cols="30" rows="10" class="form-control"
                             placeholder="Device description" required="required"></textarea>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="photos" class="form-label">Photos</label>
+                            <input type="file" name="photos[]" multiple="multiple">
                         </div>
                         <div class="form-group col-md-12">
                             <button type="submit" class="btn btn-success">Submit</button>

@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class ResourceController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Create a new instance of the resource.
      * 
      * @return \Illuminate\Http\Response
@@ -35,6 +45,12 @@ class ResourceController extends Controller
             'name'    => $request->name,
             'desc'    => $request->desc
         ]);
+
+        if ($request->has('photos')) {
+            foreach ($request->photos as $key => $photo) {
+                $resource->uploadPhoto($photo, "$resource->name photo");
+            }
+        }
 
         return redirect('/home')->with(['status' => 'Device successfully created']);
     }

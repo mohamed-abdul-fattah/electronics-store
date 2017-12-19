@@ -25,6 +25,7 @@
                         </thead>
                         <tbody>
                             @foreach($resources as $resource)
+                            <tr>
                                 <td>{{$resource->name}}</td>
                                 <td>
                                     @if(strlen($resource->desc) > 70)
@@ -38,9 +39,10 @@
                                 </td>
                                 <td>
                                     {{Form::open(['url' => "resources/{$resource->id}", 'method' => 'DELETE'])}}
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger" onclick="deleteConfirm(event)">Delete</button>
                                     {{Form::close()}}
                                 </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -49,4 +51,11 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function deleteConfirm(e) {
+        const conf = confirm('Are you sure?');
+        if (!conf) e.preventDefault();
+    }
+</script>
 @endsection

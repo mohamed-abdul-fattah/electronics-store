@@ -20,7 +20,7 @@ class CreatePhotosTable extends Migration
             $table->string('thumb');
             $table->string('caption');
             $table->boolean('cover');
-            $table->morphs('resourceable');
+            $table->morphs('photoable');
             $table->timestamps();
         });
     }
