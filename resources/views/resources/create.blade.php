@@ -30,8 +30,12 @@
                             placeholder="Device description" required="required"></textarea>
                         </div>
                         <div class="form-group col-md-12">
+                            <label for="cover" class="form-label">Cover</label>
+                            <input id="cover" type="file" name="cover">
+                        </div>
+                        <div class="form-group col-md-12">
                             <label for="photos" class="form-label">Photos</label>
-                            <input type="file" name="photos[]" multiple="multiple">
+                            <input id="photos" type="file" name="photos[]" multiple="multiple">
                         </div>
                         <div class="form-group col-md-12">
                             <button type="submit" class="btn btn-success">Submit</button>

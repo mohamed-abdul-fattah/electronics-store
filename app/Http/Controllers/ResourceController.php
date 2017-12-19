@@ -46,6 +46,10 @@ class ResourceController extends Controller
             'desc'    => $request->desc
         ]);
 
+        if ($request->hasFile('cover')) {
+            $resource->uploadPhoto($request->file('cover'), "$resource->name cover", 1);
+        }
+
         if ($request->has('photos')) {
             foreach ($request->photos as $key => $photo) {
                 $resource->uploadPhoto($photo, "$resource->name photo");
@@ -81,6 +85,13 @@ class ResourceController extends Controller
         ]);
 
         $resource->update($request->only('name', 'desc'));
+
+        if ($request->hasFile('cover')) {
+            if ($resource->cover()) {
+                $resource->cover()->update(['cover' => 0]);
+            }
+            $resource->uploadPhoto($request->file('cover'), "$resource->name cover", 1);
+        }
 
         if ($request->has('photos')) {
             foreach ($request->photos as $key => $photo) {

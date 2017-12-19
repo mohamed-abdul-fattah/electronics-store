@@ -15,6 +15,7 @@
     .fancy-images a {
         position: relative;
         display: inline-block;
+        overflow: hidden;
     }
     .fancy-images a img {
         margin: 3px;
@@ -27,6 +28,18 @@
     }
     .fa-trash-o:hover {
         color: brown;
+    }
+    .fancy-images a .cover {
+        position: absolute;
+        right: -20px;
+        top: 15px;
+        transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        padding: 0 25px;
+        background-color: #008000;
+        color: #fff;
+        font-size: 0.7em;
     }
 </style>
 @endsection
@@ -53,6 +66,9 @@
                         @foreach($resource->photos as $photo)
                             <a data-fancybox="gallery" href="{{$photo->url}}">
                                 <i class="fa fa-trash-o" aria-hidden="true" data-id="{{$photo->id}}"></i>
+                                 @if ($photo->cover)
+                                    <span class="cover">COVER</span>
+                                @endif
                                 <img src="{{$photo->thumb}}">
                             </a>
                         @endforeach
@@ -70,8 +86,12 @@
                             placeholder="Device description" required="required">{{$resource->desc}}</textarea>
                         </div>
                         <div class="form-group col-md-12">
+                            <label for="cover" class="form-label">Cover</label>
+                            <input id="cover" type="file" name="cover">
+                        </div>
+                        <div class="form-group col-md-12">
                             <label for="photos" class="form-label">Photos</label>
-                            <input type="file" name="photos[]" multiple="multiple">
+                            <input id="photos" type="file" name="photos[]" multiple="multiple">
                         </div>
                         <div class="form-group col-md-12">
                             <button type="submit" class="btn btn-success">Update</button>
