@@ -51,7 +51,7 @@
                         <hr>
                     </div>
                     <div class="col-md-12">
-                        <a href="/home" class="btn btn-danger">Back</a>
+                        <a href="/home" class="btn btn-danger">Home</a>
                     </div>
                 </div>
             </div>

@@ -34,7 +34,7 @@ class DashboardController extends Controller
      */
     public function home()
     {
-        $resources = Resource::all();
+        $resources = Resource::paginate(10);
         return view('dashboard.home', compact('resources'));
     }
 }

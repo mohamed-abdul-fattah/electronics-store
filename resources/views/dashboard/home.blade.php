@@ -46,6 +46,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $resources->links() }}
                 </div>
             </div>
         </div>
