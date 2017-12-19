@@ -4,13 +4,29 @@
 {{--  Fancy Box  --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
 {{--  End Fancy Box  --}}
+{{--  Fontawesome  --}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+{{--  End Fontawesome  --}}
 <style media="screen">
     .fancy-images {
         text-align: center;
         margin-bottom: 10px;
     }
+    .fancy-images a {
+        position: relative;
+        display: inline-block;
+    }
     .fancy-images a img {
         margin: 3px;
+    }
+    .fa-trash-o {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        color: red;
+    }
+    .fa-trash-o:hover {
+        color: brown;
     }
 </style>
 @endsection
@@ -35,7 +51,10 @@
                     @if(count($resource->photos))
                         <div class="col-md-12 fancy-images">
                         @foreach($resource->photos as $photo)
-                            <a data-fancybox="gallery" href="{{$photo->url}}"><img src="{{$photo->thumb}}"></a>
+                            <a data-fancybox="gallery" href="{{$photo->url}}">
+                                <i class="fa fa-trash-o" aria-hidden="true" data-id="{{$photo->id}}"></i>
+                                <img src="{{$photo->thumb}}">
+                            </a>
                         @endforeach
                         </div>
                     @endif
@@ -56,6 +75,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <button type="submit" class="btn btn-success">Update</button>
+                            <a href="/home" class="btn btn-danger">Cancel</a>
                         </div>
                     {{Form::close()}}
                 </div>
@@ -69,4 +89,24 @@
 {{--  Fancy Box  --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
 {{--  End Fancy Box  --}}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.fa-trash-o').on('click', function (e) {
+            e.preventDefault();
+            const photoId  = $(this).attr('data-id'),
+                  image    = $(this).parent();
+            $.ajax({
+                url: `/photos/${photoId}`,
+                method: 'DELETE',
+                contentType: 'application/json'
+            }).done(res => {
+                if (res.success) {
+                    image.hide('fast', function () {
+                        image.remove();
+                    });
+                }
+            });
+        });
+    });
+</script>
 @endsection

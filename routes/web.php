@@ -14,8 +14,9 @@
 Route::domain('staff.'.ENV('APP_URL'))->group(function () {
     Auth::routes();
     Route::get('/', 'DashboardController@index')->name('dashboard.index')->middleware('guest');
-    Route::get('/home', 'DashboardController@home')->name('dashboard.home');
+    Route::get('home', 'DashboardController@home')->name('dashboard.home');
     Route::resource('resources', 'ResourceController')->except('show');
+    Route::delete('photos/{photo}', 'PhotoController@destroy')->name('photos.destroy');
 });
 
 Route::get('/', function () {
