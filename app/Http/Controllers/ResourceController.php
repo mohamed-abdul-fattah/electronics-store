@@ -38,4 +38,27 @@ class ResourceController extends Controller
 
         return redirect('/home')->with(['status' => 'Device successfully created']);
     }
+
+    /**
+     * Show edit form for a resource
+     * 
+     * @param  Resource  $resource
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Resource $resource)
+    {
+        return view('resources.edit', compact('resource'));
+    }
+
+    /**
+     * Delete a resource from storage.
+     * 
+     * @param  Resource  $resource
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Resource $resource)
+    {
+        $resource->delete();
+        return redirect('/home')->with(['status' => 'Deivce successfully deleted']);
+    }
 }
