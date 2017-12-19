@@ -82,6 +82,12 @@ class ResourceController extends Controller
 
         $resource->update($request->only('name', 'desc'));
 
+        if ($request->has('photos')) {
+            foreach ($request->photos as $key => $photo) {
+                $resource->uploadPhoto($photo, "$resource->name photo");
+            }
+        }
+
         return redirect('/home')->with(['status' => 'Device successfully updated']);
     }
 
