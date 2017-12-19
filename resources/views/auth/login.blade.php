@@ -11,6 +11,10 @@
 @endsection
 
 @section('content')
+@php
+    @$domain = Route::current()->action['domain'];
+    $match   = preg_match('/^staff/', $domain);
+@endphp
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -69,11 +73,13 @@
                                     Forgot Your Password?
                                 </a>
                             </div>
-                            <div class="col-md-6 col-md-offset-4 facebook">
-                                <a class="btn btn-primary form-control" href="{{ url('oauth/facebook/redirect') }}">
-                                    <i class="fa fa-facebook" aria-hidden="true"></i> Login via Facebook
-                                </a>
-                            </div>
+                            @if(!$match)
+                                <div class="col-md-6 col-md-offset-4 facebook">
+                                    <a class="btn btn-primary form-control" href="{{ url('oauth/facebook/redirect') }}">
+                                        <i class="fa fa-facebook" aria-hidden="true"></i> Login via Facebook
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </form>
                 </div>
