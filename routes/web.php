@@ -11,8 +11,18 @@
 |
 */
 
+Route::domain('staff.'.ENV('APP_URL'))->group(function () {
+    Auth::routes();
+    Route::get('/', function () {
+        return view('auth.login');
+    });
+    Route::get('/home', function () {
+        return view('dashboard.home');
+    });
+});
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.welcome');
 });
 
 Auth::routes();
