@@ -1,58 +1,61 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# ELectronics Store
+## Installation
+### Virtual host configuration
+You have to use a virtual host to be able to navigate to staff area to add devices to the store.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Here is how you can make a virtual host on Ubuntu.
+1. Clone the repo into `~/projects/electornics-store` path
+2. Run the following commands to generate a config file for the virtual host
+```bash
+$ cd /etc/apache2/sites-available
+$ sudo touch electronics.conf
+$ sudo vim electronics.conf
+```
+3. Copy and paste the following code in `electornics.conf` and change `YOUR_EMAIL` and `YOUR_USERNAME` to your values
+```xml
+<VirtualHost *:80>
+        ServerName electronics.dev
+        ServerAlias staff.electronics.dev
 
-## About Laravel
+        ServerAdmin YOUR_EMAIL
+        DocumentRoot /home/YOUR_USERNAME/projects/electronics-store/public
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+        <Directory /home/YOUR_USERNAME/projects/electronics-store/public >
+                Options -Indexes +FollowSymlinks +MultiViews
+                AllowOverride all
+                Require all granted
+        </Directory>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
-
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+        ErrorLog ${APACHE_LOG_DIR}/electronics-error.log
+        CustomLog ${APACHE_LOG_DIR}/electronics-access.log combined
+</VirtualHost>
+```
+4. Then run following commands to add the domains to the hosts file
+```bash
+$ sudo vim /etc/hosts
+```
+5. Add these lines to the end of the file
+```text
+127.0.0.1	electronics.dev
+127.0.0.1	staff.electronics.dev
+```
+6. Finally run this command to enable the virtual host and reload the apache server
+```bash
+$ sudo a2ensite electronics.conf
+$ sudo systemctl reload apache2
+```
+### Laravel setup
+Navigate to electornics-store repo and configure your .env database variables and add electornics.dev to `APP_URL` variable, then run the following.
+```bash
+$ sudo chmod -R 777 bootstrap/
+$ sudo chmod -R 777 storage/
+$ php artisan key:generate
+$ composer install
+$ php artisan migrate --seed
+```
+Navigate to [electronics.dev]() to view the frontend website and [staff.electornics.dev]() to view the dashboard.
+Use these credentials to login to dashboard
+```
+Email: admin@admin.com
+Password: secret
+```
