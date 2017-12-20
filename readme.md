@@ -49,8 +49,8 @@ Navigate to electornics-store repo and configure your .env database variables an
 ```bash
 $ sudo chmod -R 777 bootstrap/
 $ sudo chmod -R 777 storage/
-$ php artisan key:generate
 $ composer install
+$ php artisan key:generate
 $ php artisan migrate --seed
 ```
 Navigate to [electronics.dev]() to view the frontend website and [staff.electornics.dev]() to view the dashboard.
