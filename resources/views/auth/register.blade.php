@@ -80,7 +80,7 @@
                         </div>
                         <div class="col-md-6 col-md-offset-4 facebook">
                             <a class="btn btn-primary form-control" href="{{ url('oauth/facebook/redirect') }}">
-                                <i class="fa fa-facebook" aria-hidden="true"></i> Login via Facebook
+                                <i class="fa fa-facebook" aria-hidden="true"></i> Register via Facebook
                             </a>
                         </div>
                     </form>
