@@ -36,8 +36,10 @@ class ResourceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'desc' => 'required|string'
+            'name'     => 'required|string|max:255',
+            'desc'     => 'required|string',
+            'cover'    => 'image',
+            'photos.*' => 'image'
         ]);
 
         $resource = Resource::create([
@@ -91,8 +93,10 @@ class ResourceController extends Controller
     public function update(Request $request, Resource $resource)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'desc' => 'required|string'
+            'name'     => 'required|string|max:255',
+            'desc'     => 'required|string',
+            'cover'    => 'image',
+            'photos.*' => 'image'
         ]);
 
         $resource->update($request->only('name', 'desc'));
