@@ -23,20 +23,29 @@ class AdminLoginTest extends TestCase
     }
 
     /**
+     * Credentials test.
+     *
+     * @return void
+     */
+    public function testCredentials()
+    {
+        $this->assertCredentials([
+            'email'    => 'admin@admin.com',
+            'password' => 'secret'
+        ]);
+    }
+
+    /**
      * Admin login test.
      *
      * @return void
      */
     public function testAdminLogin()
     {
-        $user = factory(User::class)->make([
-            'name'     => 'Software Tester',
-            'type'     => 'user',
+        $response = $this->post('http://staff.'.ENV('APP_URL').'/login', [
+            'email'    => 'admin@admin.com',
             'password' => 'secret'
         ]);
-
-        $response = $this->actingAs($user)
-            ->post('http://staff.'.ENV('APP_URL').'/login');
 
         $response->assertRedirect('http://staff.'.ENV('APP_URL').'/home');
     }
